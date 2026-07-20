@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memories</title>
+    <style>
+        body { font-family: 'Palatino', 'Georgia', serif; background-color: #fefcf7; text-align: center; padding: 20px; color: #5a4a42; }
+        #welcomeScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fefcf7; z-index: 20; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .btn { background: #8b4513; color: white; border: none; padding: 15px 30px; border-radius: 30px; cursor: pointer; font-size: 1.2rem; margin: 10px; text-decoration: none; }
+        h1 { font-style: italic; color: #8b4513; margin-bottom: 20px; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; max-width: 800px; margin: auto; }
+        .grid-item { cursor: pointer; border-radius: 20px; border: 4px solid #fff; width: 100%; aspect-ratio: 1/1; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .modal { display: none; position: fixed; z-index: 10; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(255, 250, 240, 0.95); }
+        .modal-content { max-width: 85%; max-height: 60%; margin: auto; display: block; margin-top: 15%; border: 6px solid #fff; border-radius: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .caption { color: #5a4a42; padding: 20px; font-size: 1.3rem; font-style: italic; max-width: 80%; margin: auto; }
+        .close { position: absolute; top: 20px; right: 30px; color: #8b4513; font-size: 40px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="welcomeScreen">
+        <h1>Welcome, Irha</h1>
+        <button class="btn" onclick="startExperience(true)">Play Music & Enter</button>
+        <button class="btn" style="background:#a0522d;" onclick="startExperience(false)">Enter Silently</button>
+    </div>
+
+    <h1>Our Memories</h1>
+    <audio id="bgMusic" loop>
+        <source src="Song1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="grid-container" id="grid"></div>
+
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
+        <p id="modalCaption" class="caption"></p>
+    </div>
+
+    <script>
+        const stories = ["Irha, every photo of us is a memory I never want to lose.", "They say distance makes the heart grow fonder, but with you, it just makes the love grow deeper.", "In every smile you capture, I see the reason I wake up every day.", "You are the heartbeat I didn’t know I needed until I met you.", "Irha, you are the most beautiful part of my reality.", "A thousand miles could never stand between what I feel for you.", "Loving you is the easiest thing I have ever done.", "Every time I look at your face, I realize how incredibly lucky I am.", "You are my home, no matter how many miles are between us.", "Irha, you hold the keys to a heart that only beats for you.", "Even through a screen, your eyes set my world on fire.", "I am counting the days until \"long-distance\" is just a story we tell.", "You are my soul’s favorite place to be.", "Irha, you are the dream I never want to wake up from.", "My love for you transcends space, time, and everything in between.", "Just looking at your photo makes the world feel right again.", "You are the melody in the song of my life.", "Irha, you turn my ordinary days into something extraordinary.", "I love you more than words can express and more than photos can show.", "Your voice is my favorite sound; your smile is my favorite sight.", "Four years later, and you still give me butterflies every single day.", "Irha, you are my sun, my moon, and all of my stars.", "There is nowhere else I would rather be than in your heart.", "You are the fire that keeps me warm when we are apart.", "Every moment with you—even the digital ones—is a treasure.", "Irha, you are the masterpiece I never want to stop admiring.", "My love for you is a journey that starts at forever and ends at never.", "Being yours is the greatest honor of my life.", "You are the reason my world is full of color.", "Irha, you are the soft whisper of my heart.", "I carry your love with me like a secret and a song.", "You are the missing piece I spent my whole life searching for.", "With every look you give, you own a little more of me.", "Irha, you are my safe harbor in every storm.", "The distance is just a test of how far love can travel.", "I find pieces of you in everything beautiful I see.", "You are the rhythm of my soul, Irha.", "My heart is exactly where you are.", "You make me want to be the best version of myself.", "Irha, your love is the anchor that holds me steady.", "I am addicted to the way you look at me, even in pictures.", "You are the promise I want to keep for the rest of my life.", "Every photo tells a story, and you are the best part of mine.", "Irha, you are the poetry I was meant to write.", "Your love is the greatest adventure I have ever known.", "Even apart, we are perfectly synced in heart and mind.", "You are the dream I’ve been chasing and finally found.", "Irha, you are the beautiful chaos I never want to calm.", "I love you beyond the distance, beyond the time, and beyond everything.", "To my beautiful wife, Irha—you are, and always will be, my everything."];
+
+        let currentIndex = 0;
+        function startExperience(playMusic) {
+            document.getElementById('welcomeScreen').style.display = 'none';
+            if (playMusic) { document.getElementById('bgMusic').play(); }
+        }
+
+        const grid = document.getElementById('grid');
+        for (let i = 0; i < 50; i++) {
+            grid.innerHTML += `<img src="photos/P-${i+1}.jpg" class="grid-item" onclick="openModal(${i})">`;
+        }
+
+        function openModal(index) {
+            currentIndex = index;
+            document.getElementById("myModal").style.display = "block";
+            updateModal();
+        }
+
+        function updateModal() {
+            document.getElementById("modalImg").src = `photos/P-${currentIndex+1}.jpg`;
+            document.getElementById("modalCaption").innerHTML = stories[currentIndex];
+        }
+
+        function closeModal() { document.getElementById("myModal").style.display = "none"; }
+
+        let touchStartX = 0;
+        document.getElementById("myModal").addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        document.getElementById("myModal").addEventListener('touchend', e => {
+            let diff = e.changedTouches[0].screenX - touchStartX;
+            if (diff > 50 && currentIndex > 0) { currentIndex--; updateModal(); }
+            else if (diff < -50 && currentIndex < 49) { currentIndex++; updateModal(); }
+        });
+    </script>
+</body>
+</html>

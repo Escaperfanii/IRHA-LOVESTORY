@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .stylish-text { font-family: 'Georgia', serif; font-weight: bold; text-transform: uppercase; color: #d62828; }
+        .angry-bg { background: black !important; color: red !important; }
+        .emoji-screen { font-size: 50px; text-align: center; padding-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <!-- Main Question Card -->
+    <div class="card" id="q1">
+        <h1 class="stylish-text">HI "IRHA"</h1>
+        <p>Do you know "FANI KHAN"?</p>
+        <!-- Updated to go to confession.html -->
+        <a href="confession.html" class="btn">Yes</a>
+        <button class="btn" onclick="showAngry()" style="background: #333;">No</button>
+    </div>
+
+    <!-- Angry Screen -->
+    <div class="card" id="angryBox" style="display: none; background: #fff;">
+        <h1 class="stylish-text">REALLY YOU DONT KNOW?</h1>
+        <p class="stylish-text">THINK AGAIN! YOU HAVE A CHANCE!</p>
+        <p>If you don't know, then you are not IRHA!</p>
+        <div class="emoji-screen">😡😡😡😡😡</div>
+        <br>
+        <button class="btn" onclick="goBack()" style="background: #d62828;">GO BACK</button>
+    </div>
+
+    <script>
+        function showAngry() {
+            document.getElementById('q1').style.display = 'none';
+            document.getElementById('angryBox').style.display = 'block';
+        }
+        function goBack() {
+            document.getElementById('angryBox').style.display = 'none';
+            document.getElementById('q1').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+

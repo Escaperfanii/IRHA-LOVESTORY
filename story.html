@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .proposal-text { font-family: 'Georgia', serif; font-size: 1.2rem; color: #333; line-height: 1.8; }
+        .highlight { color: #d62828; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 id="title" class="highlight">Our Forever</h1>
+        <div id="proposal-content">
+            <p class="proposal-text">
+                Every moment with you has been a beautiful memory. <br><br>
+                You are my today and all of my tomorrows. <br><br>
+                <span class="highlight">Will you be mine forever?</span>
+            </p>
+            <br>
+            <div id="buttons">
+                <button class="btn" onclick="sayYes()" style="padding: 15px 40px; font-size: 1.1rem;">YES!</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sayYes() {
+            document.getElementById('title').innerHTML = "💖 I love you! 💖";
+            document.getElementById('proposal-content').innerHTML = `
+                <p class="proposal-text">
+                    You have made me the happiest person in the world. <br><br>
+                    I promise to love you, support you, and cherish every moment by your side.
+                </p>
+                <br>
+                <a href="gallery.html" class="btn">FANI's PHOTOS</a>
+            `;
+        }
+    </script>
+</body>
+</html>
+
